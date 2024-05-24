@@ -1,0 +1,56 @@
+class Solution {
+
+// All nodes k far
+    public boolean find_Path_node(TreeNode root,TreeNode target,List<TreeNode> n2rpath){
+        if(root==null)
+        return false;
+        
+        if(root == target){
+            n2rpath.add(root);
+            return true;
+        }
+        
+        
+        boolean isInLn = find_Path_node(root.left,target,n2rpath);
+        if(isInLn==true){
+            n2rpath.add(root);
+            return true;
+        }
+        
+        boolean isInRn = find_Path_node(root.right,target,n2rpath);
+        if(isInRn==true){
+            n2rpath.add(root);
+            return true;
+        }
+        
+        return false;
+    }
+
+    public void Print_k_levelsDown(TreeNode root,int k,TreeNode block){
+        if(root==null || root==block)
+        return;
+        
+        if(k==0){
+            ans.add(root.val);
+        }
+        
+        Print_k_levelsDown(root.left,k-1,block);
+        Print_k_levelsDown(root.right,k-1,block);
+    }
+    List<Integer> ans = new ArrayList<>();
+
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        List<TreeNode> n2rpath = new ArrayList<>();
+        boolean f1 = find_Path_node(root,target,n2rpath);
+
+        TreeNode block = null;
+        for(TreeNode node : n2rpath){
+            Print_k_levelsDown(node,k,block);
+            k--;
+            block = node;
+
+        }
+
+        return ans;
+    }
+}

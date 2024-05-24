@@ -1,0 +1,22 @@
+public void Display_BinaryTree(TreeNode root){
+        if(root==null)
+        return;
+
+        String s1="";
+        if(root.left!=null)
+        s1+=root.left.val;
+        else
+        s1+=".";
+        
+        s1+=" <-- "+ root.val+" -- > ";
+        
+        if(root.right!=null)
+        s1+=root.right.val;
+        else
+        s1+=".";
+        
+        System.out.println(s1);
+        
+        Display_BinaryTree(root.left);
+        Display_BinaryTree(root.right);
+    }
